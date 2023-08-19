@@ -15,7 +15,7 @@ These functions are [generic functions](https://go.dev/doc/tutorial/generics#add
 
 They can be resolved by hash ([API hashing](https://www.ired.team/offensive-security/defense-evasion/windows-api-hashing-in-malware)), a common technique used in malware development. The hashing algorithm used is [sdbm](http://www.cse.yorku.ca/~oz/hash.html#sdbm).
 
-You can read more about those functions on my blog: (https://blog.atsika.ninja/posts/custom_getmodulehandle_getprocaddress/)[https://blog.atsika.ninja/posts/custom_getmodulehandle_getprocaddress/]
+You can read more about those functions on my blog: [https://blog.atsika.ninja/posts/custom_getmodulehandle_getprocaddress/](https://blog.atsika.ninja/posts/custom_getmodulehandle_getprocaddress/)
 
 ### NewDLL
 
