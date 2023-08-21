@@ -39,7 +39,7 @@ func NewDLL[T ~string | ~uint32](module T) *windows.DLL {
 	for next := head.Flink; *next != head; next = next.Flink {
 		entry := (*LDR_DATA_TABLE_ENTRY)(unsafe.Pointer(next))
 		currentName := strings.ToLower(entry.BaseDllName.String())
-		if currentName == modName || hash(currentName) == modHash {
+		if currentName == modName || Hash(currentName) == modHash {
 			dll.Handle = windows.Handle(entry.DllBase)
 			dll.Name = currentName
 			return dll

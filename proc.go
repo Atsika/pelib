@@ -78,7 +78,7 @@ func NewProc[T ~string | ~uint16 | ~uint32](dll *windows.DLL, procedure T) *wind
 	if procAddr == 0 {
 		for i := uintptr(0); i < uintptr(exportDir.NumberOfNames); i++ {
 			currentName := windows.BytePtrToString((*byte)(unsafe.Add(module, *(*uint32)(unsafe.Add(addrOfNames, i*sizeofUint32)))))
-			if currentName == procName || hash(currentName) == procHash {
+			if currentName == procName || Hash(currentName) == procHash {
 				index := *(*uint16)(unsafe.Add(addrOfNameOrdinals, i*sizeofUint16))
 				procAddr = uintptr(module) + uintptr(*(*uint32)(unsafe.Add(addrOfFunctions, index*uint16(sizeofUint32))))
 				goto Found
