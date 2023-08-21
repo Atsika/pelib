@@ -36,7 +36,6 @@ func NewProc[T ~string | ~uint16 | ~uint32](dll *windows.DLL, procedure T) *wind
 
 	proc := new(windows.Proc)
 	proc.Dll = dll
-	proc.Name = procName
 
 	module := unsafe.Pointer(dll.Handle)
 
@@ -50,6 +49,7 @@ func NewProc[T ~string | ~uint16 | ~uint32](dll *windows.DLL, procedure T) *wind
 	if procOrdinal != 0 {
 		procOrdinal = procOrdinal - uint16(exportDir.Base)
 		rva := *(*uint32)(unsafe.Add(addrOfFunctions, procOrdinal*uint16(sizeofUint32)))
+		proc.Name = windows.BytePtrToString((*byte)(unsafe.Add(module, *(*uint32)(unsafe.Add(addrOfNames, procOrdinal*uint16(sizeofUint32))))))
 		procAddr = uintptr(module) + uintptr(rva)
 		goto Found
 	}
@@ -64,6 +64,7 @@ func NewProc[T ~string | ~uint16 | ~uint32](dll *windows.DLL, procedure T) *wind
 			currentName := windows.BytePtrToString((*byte)(unsafe.Add(module, *(*uint32)(unsafe.Add(addrOfNames, middle*sizeofUint32)))))
 			if currentName == procName {
 				index := *(*uint16)(unsafe.Add(addrOfNameOrdinals, middle*sizeofUint16))
+				proc.Name = currentName
 				procAddr = uintptr(module) + uintptr(*(*uint32)(unsafe.Add(addrOfFunctions, index*uint16(sizeofUint32))))
 				goto Found
 			} else if currentName < procName {
@@ -80,6 +81,7 @@ func NewProc[T ~string | ~uint16 | ~uint32](dll *windows.DLL, procedure T) *wind
 			currentName := windows.BytePtrToString((*byte)(unsafe.Add(module, *(*uint32)(unsafe.Add(addrOfNames, i*sizeofUint32)))))
 			if currentName == procName || Hash(currentName) == procHash {
 				index := *(*uint16)(unsafe.Add(addrOfNameOrdinals, i*sizeofUint16))
+				proc.Name = currentName
 				procAddr = uintptr(module) + uintptr(*(*uint32)(unsafe.Add(addrOfFunctions, index*uint16(sizeofUint32))))
 				goto Found
 			}
