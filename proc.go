@@ -47,9 +47,23 @@ func NewProc[T ~string | ~uint16 | ~uint32](dll *windows.DLL, procedure T) *wind
 	addrOfNameOrdinals := unsafe.Add(module, exportDir.AddressOfNameOrdinals)
 
 	if procOrdinal != 0 {
+
 		procOrdinal = procOrdinal - uint16(exportDir.Base)
+
+		ordToNameId := make(map[uint16]uintptr)
+		nameOrdRVA := addrOfNameOrdinals
+		for i := uintptr(0); i < uintptr(exportDir.NumberOfNames); i++ {
+			nameOrd := *(*uint16)(unsafe.Add(addrOfNameOrdinals, i*sizeofUint16))
+			ordToNameId[nameOrd] = i
+			nameOrdRVA = unsafe.Add(nameOrdRVA, sizeofUint16)
+		}
+
+		nameId, ok := ordToNameId[procOrdinal]
+		if ok {
+			proc.Name = windows.BytePtrToString((*byte)(unsafe.Add(module, *(*uint32)(unsafe.Add(addrOfNames, nameId*sizeofUint32)))))
+		}
+
 		rva := *(*uint32)(unsafe.Add(addrOfFunctions, procOrdinal*uint16(sizeofUint32)))
-		proc.Name = windows.BytePtrToString((*byte)(unsafe.Add(module, *(*uint32)(unsafe.Add(addrOfNames, procOrdinal*uint16(sizeofUint32))))))
 		procAddr = uintptr(module) + uintptr(rva)
 		goto Found
 	}
