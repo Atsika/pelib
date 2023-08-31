@@ -1,4 +1,2 @@
-github.com/atsika/wintypes v0.0.0-20230817180238-3a0b502953a2 h1:+QLCt+pwEYsDBxSZXuwKtSP628DeK49XaXcr0IuxzqU=
-github.com/atsika/wintypes v0.0.0-20230817180238-3a0b502953a2/go.mod h1:mUbd9aRmnbf/Y/OpRc6w4CZy8FRdl2biXKXuRb9IdEs=
 golang.org/x/sys v0.11.0 h1:eG7RXZHdqOJ1i+0lgLgCpSXAp6M3LYlAo6osgSi0xOM=
 golang.org/x/sys v0.11.0/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
