@@ -2,6 +2,20 @@
 
 PElib (Portable Executable library) is a Go module for parsing PE, including extensive Windows types and structures definitions.
 
+[![Static Badge](https://img.shields.io/badge/made_with-Go-007D9C)](https://go.dev/)
+[![Go Report](https://goreportcard.com/badge/github.com/nicocha30/ligolo-ng)](https://goreportcard.com/report/github.com/atsika/pelib)
+[![GitHub](https://img.shields.io/github/license/atsika/pelib)](https://choosealicense.com/licenses/mit/)
+
+## Table of contents
+
+- [Features](#features)
+  - [NewDLL](#newdll)
+  - [NewProc](#newproc)
+- [Usage](#usage)
+- [Changelog](#changelog)
+- [Used in](#used-in)
+- [License](#license)
+
 ## Features
 
 **PElib** exports multiple functions and structures related to PE parsing. The full list can be found here: [pkg.go.dev/github.com/atsika/pelib](https://pkg.go.dev/github.com/atsika/pelib) 
@@ -32,7 +46,7 @@ If the resolution fails, `nil` is returned.
 
 ## Usage
 
-1. Import the module directly in your project.
+1. Import the module in your project.
 
 ```go
 import (
@@ -40,7 +54,7 @@ import (
 )
 ```
 
-2. Start using exported functions to resolve module handles and function addresses.
+2. Resolve modules and functions.
 
 ```go
 kernel32 := pelib.NewDLL("kernel32.dll")
@@ -64,6 +78,12 @@ hHeap, _ , _ := GetProcessHeap.Call()
 3. Profit
 
 > An example of a classic process injection technique using this module and API hashing can be found in the [example](/example) folder.
+
+## Changelog
+
+- 31/08/2023: Added API sets V6 (Windows 10) resolution
+- 21/08/2023: Export some useful functions (GetPEB, GetDosHeader, GetNtHeaders, GetDataDirectory,...)
+- 01/08/2023: Initial release accompanying the blog post
 
 ## Used in
 

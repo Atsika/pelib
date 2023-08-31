@@ -354,6 +354,28 @@ type API_SET_NAMESPACE struct {
 	HashFactor  uint32
 }
 
+type API_SET_HASH_ENTRY struct {
+	Hash  uint32
+	Index uint32
+}
+
+type API_SET_NAMESPACE_ENTRY struct {
+	Flags        uint32
+	NameOffset   uint32
+	NameLength   uint32
+	HashedLength uint32
+	ValueOffset  uint32
+	ValueCount   uint32
+}
+
+type API_SET_VALUE_ENTRY struct {
+	Flags       uint32
+	NameOffset  uint32
+	NameLength  uint32
+	ValueOffset uint32
+	ValueLength uint32
+}
+
 type LDR_DATA_TABLE_ENTRY struct {
 	InLoadOrderLinks           LIST_ENTRY
 	InMemoryOrderLinks         LIST_ENTRY
