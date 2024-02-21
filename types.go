@@ -513,3 +513,219 @@ type RTL_BALANCED_NODE struct {
 	    }
 	*/
 }
+
+type TEB struct {
+	NtTib                              NT_TIB
+	EnvironmentPointer                 uintptr
+	ClientId                           CLIENT_ID
+	ActiveRpcHandle                    uintptr
+	ThreadLocalStoragePointer          uintptr
+	ProcessEnvironmentBlock            *PEB
+	LastErrorValue                     uint32
+	CountOfOwnedCriticalSections       uint32
+	CsrClientThread                    uintptr
+	Win32ThreadInfo                    uintptr
+	User32Reserved                     [26]uint32
+	UserReserved                       [5]uint32
+	WOW32Reserved                      uintptr
+	CurrentLocale                      uint32
+	FpSoftwareStatusRegister           uint32
+	ReservedForDebuggerInstrumentation [16]uintptr
+	SystemReserved1                    [30]uintptr
+	PlaceholderCompatibilityMode       byte
+	PlaceholderHydrationAlwaysExplicit uint8
+	PlaceholderReserved                [10]byte
+	ProxiedProcessId                   uint32
+	ActivationStack                    ACTIVATION_CONTEXT_STACK
+	WorkingOnBehalfTicket              [8]byte
+	ExceptionCode                      uint32
+	Padding0                           [4]byte
+	ActivationContextStackPointer      *ACTIVATION_CONTEXT_STACK
+	InstrumentationCallbackSp          uint64
+	InstrumentationCallbackPreviousPc  uint64
+	InstrumentationCallbackPreviousSp  uint64
+	TxFsContext                        uint32
+	InstrumentationCallbackDisabled    byte
+	UnalignedLoadStoreExceptions       byte
+	Padding1                           [2]byte
+	GdiTebBatch                        GDI_TEB_BATCH
+	RealClientId                       CLIENT_ID
+	GdiCachedProcessHandle             uintptr
+	GdiClientPID                       uint32
+	GdiClientTID                       uint32
+	GdiThreadLocalInfo                 uint32
+	Win32ClientInfo                    [62]uint64
+	glDispatchTable                    [233]uintptr
+	glReserved1                        [29]uint64
+	glReserved2                        uint32
+	glSectionInfo                      uint32
+	glSection                          uint32
+	glTable                            uint32
+	glCurrentRC                        uint32
+	glContext                          uint32
+	LastStatusValue                    uint32
+	Padding2                           [4]byte
+	StaticUnicodeString                windows.NTUnicodeString
+	StaticUnicodeBuffer                [261]uint16
+	Padding3                           [6]byte
+	DeallocationStack                  uintptr
+	TlsSlots                           [64]uintptr
+	TlsLinks                           LIST_ENTRY
+	Vdm                                uintptr
+	ReservedForNtRpc                   uintptr
+	DbgSsReserved                      [2]uintptr
+	HardErrorMode                      uint32
+	Padding4                           [4]byte
+	Instrumentation                    [11]uintptr
+	ActivityId                         windows.GUID
+	SubProcessTag                      uintptr
+	PerflibData                        uintptr
+	EtwTraceData                       uintptr
+	WinSockData                        uintptr
+	GdiBatchCount                      uint32
+	IdealProcessor                     uint32
+	/*
+			union
+		    {
+		        struct _PROCESSOR_NUMBER CurrentIdealProcessor;                     //0x1744
+		        ULONG IdealProcessorValue;                                          //0x1744
+		        struct
+		        {
+		            UCHAR ReservedPad0;                                             //0x1744
+		            UCHAR ReservedPad1;                                             //0x1745
+		            UCHAR ReservedPad2;                                             //0x1746
+		            UCHAR IdealProcessor;                                           //0x1747
+		        };
+		    };
+	*/
+	GuaranteedStackBytes     uint32
+	Padding5                 [4]byte
+	ReservedForPerf          uintptr
+	ReservedForOle           uintptr
+	WaitingOnLoaderLock      uint32
+	Padding6                 [4]byte
+	SavedPriorityState       uintptr
+	ReservedForCodeCoverage  uint64
+	ThreadPoolData           uintptr
+	TlsExpansionSlots        *uintptr
+	ChpeV2CpuAreaInfo        uintptr // _CHPEV2_CPUAREA_INFO*
+	Unused                   uintptr
+	MuiGeneration            uint32
+	IsImpersonating          uint32
+	NlsCache                 uintptr
+	ShimData                 uintptr
+	HeapData                 uint32
+	Padding7                 [4]byte
+	CurrentTransactionHandle uintptr
+	ActiveFrame              *TEB_ACTIVE_FRAME
+	FlsData                  uintptr
+	PreferredLanguages       uintptr
+	UserPrefLanguages        uintptr
+	MergedPrefLanguages      uintptr
+	MuiImpersonation         uint32
+	CrossTebFlag             uint16
+	/*
+			union
+		    {
+		        volatile USHORT CrossTebFlags;                                      //0x17ec
+		        USHORT SpareCrossTebBits:16;                                        //0x17ec
+		    };
+	*/
+	SameTebFlags uint16
+	/*
+			union
+		    {
+		        USHORT SameTebFlags;                                                //0x17ee
+		        struct
+		        {
+		            USHORT SafeThunkCall:1;                                         //0x17ee
+		            USHORT InDebugPrint:1;                                          //0x17ee
+		            USHORT HasFiberData:1;                                          //0x17ee
+		            USHORT SkipThreadAttach:1;                                      //0x17ee
+		            USHORT WerInShipAssertCode:1;                                   //0x17ee
+		            USHORT RanProcessInit:1;                                        //0x17ee
+		            USHORT ClonedThread:1;                                          //0x17ee
+		            USHORT SuppressDebugMsg:1;                                      //0x17ee
+		            USHORT DisableUserStackWalk:1;                                  //0x17ee
+		            USHORT RtlExceptionAttached:1;                                  //0x17ee
+		            USHORT InitialThread:1;                                         //0x17ee
+		            USHORT SessionAware:1;                                          //0x17ee
+		            USHORT LoadOwner:1;                                             //0x17ee
+		            USHORT LoaderWorker:1;                                          //0x17ee
+		            USHORT SkipLoaderInit:1;                                        //0x17ee
+		            USHORT SkipFileAPIBrokering:1;                                  //0x17ee
+		        };
+		    };
+	*/
+	TxnScopeEnterCallback      uintptr
+	TxnScopeExitCallback       uintptr
+	TxnScopeContext            uintptr
+	LockCount                  uint32
+	WowTebOffset               int32
+	ResourceRetValue           uintptr
+	ReservedForWdf             uintptr
+	ReservedForCrt             uint64
+	EffectiveContainerId       windows.GUID
+	LastSleepCounter           uint64
+	SpinCallCount              uint32
+	Padding8                   [4]byte
+	ExtendedFeatureDisableMask uint64
+}
+
+type NT_TIB struct {
+	ExceptionList *EXCEPTION_REGISTRATION_RECORD
+	StackBase     uintptr
+	StackLimit    uintptr
+	SubSystemTib  uintptr
+	FiberData     uintptr
+	/* Union :
+		union
+	    {
+	        VOID* FiberData;                                                    //0x20
+	        ULONG Version;                                                      //0x20
+	    };
+	*/
+	ArbitraryUserPointer uintptr
+	Self                 *NT_TIB
+}
+
+type EXCEPTION_REGISTRATION_RECORD struct {
+	Next   *EXCEPTION_REGISTRATION_RECORD
+	Handle uintptr
+}
+
+type CLIENT_ID struct {
+	UniqueProcess uintptr
+	UniqueThread  uintptr
+}
+
+type ACTIVATION_CONTEXT_STACK struct {
+	ActiveFrame              *RTL_ACTIVATION_CONTEXT_STACK_FRAME
+	FrameListCache           LIST_ENTRY
+	Flags                    uint32
+	NextCookieSequenceNumber uint32
+	StackId                  uint32
+}
+
+type RTL_ACTIVATION_CONTEXT_STACK_FRAME struct {
+	Previous          *RTL_ACTIVATION_CONTEXT_STACK_FRAME
+	ActivationContext uintptr // _ACTIVATION_CONTEXT*
+	Flags             uint32
+}
+
+type GDI_TEB_BATCH struct {
+	OffsetAndHasRenderingCommand uint32
+	HDC                          uint64
+	Buffer                       [310]uint32
+}
+
+type TEB_ACTIVE_FRAME struct {
+	Flags    uint32
+	Previous *TEB_ACTIVE_FRAME
+	Context  *TEB_ACTIVE_FRAME_CONTEXT
+}
+
+type TEB_ACTIVE_FRAME_CONTEXT struct {
+	Flags     uint32
+	FrameName *byte
+}

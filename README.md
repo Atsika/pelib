@@ -8,13 +8,15 @@ PElib (Portable Executable library) is a Go module for parsing PE, including ext
 
 ## Table of contents
 
-- [Features](#features)
-  - [NewDLL](#newdll)
-  - [NewProc](#newproc)
-- [Usage](#usage)
-- [Changelog](#changelog)
-- [Used in](#used-in)
-- [License](#license)
+- [PElib](#pelib)
+  - [Table of contents](#table-of-contents)
+  - [Features](#features)
+    - [NewDLL](#newdll)
+    - [NewProc](#newproc)
+  - [Usage](#usage)
+  - [Changelog](#changelog)
+  - [Used in](#used-in)
+  - [License](#license)
 
 ## Features
 
@@ -81,6 +83,7 @@ hHeap, _ , _ := GetProcessHeap.Call()
 
 ## Changelog
 
+- 21/02/2024: Added TEB definition
 - 31/08/2023: Added API sets V6 (Windows 10) resolution
 - 21/08/2023: Export some useful functions (GetPEB, GetDosHeader, GetNtHeaders, GetDataDirectory,...)
 - 01/08/2023: Initial release accompanying the blog post
